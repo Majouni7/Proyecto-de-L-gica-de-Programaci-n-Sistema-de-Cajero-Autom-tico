@@ -34,6 +34,8 @@ menu = (
     "Ver historial",
     "Cerrar sesión"
 )
+
+
 #Se guarda en nuemero de cuenta del ussuario que inicie sesion#
 usuario_actual = None
 
@@ -125,6 +127,9 @@ def mostrar_menu():
         else:
             print("Opción no válida.")
 
+
+
+
 #El objetivo de esta funcion es mostrar el saldo#
 def consultar_saldo():
 
@@ -206,6 +211,8 @@ def retirar_dinero():
         #Al no cumplir con el primer condicional no podra realizar movimientos#
         else:
             print("Saldo insuficiente.")
+    else:
+        print("El monto debe ser mayor que cero.")
 
 
 
@@ -256,3 +263,24 @@ def transferir_dinero():
 
     else:
         print("La cuenta no existe.")
+
+
+        ## Historial##
+
+#Esta función muestra todos los movimientos realizados.
+def ver_historial():
+
+    print("====================================")
+    print("         HISTORIAL")
+    print("====================================")
+
+    ## De ser el caso de no tener movimientos simplemente aparecerá el título y no mostrará movimientos# 
+    for movimiento in cuentas[usuario_actual]["historial"]:
+        print(movimiento)
+
+#==========================================================
+# Programa principal
+#==========================================================
+
+#Inicia la ejecución del sistema.
+iniciar_sesion()
