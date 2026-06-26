@@ -59,8 +59,8 @@ def iniciar_sesion():
             #Guarda cual usuario inicio sesion#
             usuario_actual = cuenta
 
-            print("\n====================================")
-            print(f"Bienvenido(a) {cuentas[cuenta]['nombre']}")
+            print("====================================")
+            print("Bienvenido(a)", cuentas[cuenta]["nombre"])
             print("Inicio de sesión exitoso.")
             print("====================================")
         
@@ -71,10 +71,10 @@ def iniciar_sesion():
 
         #La siguiente condicion indica que termino con error#
         else:
-            print("\nPIN incorrecto.")
+            print("PIN incorrecto.")
             return False
  else:
-        print("\nLa cuenta no existe.")
+        print("La cuenta no existe.")
         return False
  
 
@@ -90,15 +90,15 @@ def mostrar_menu():
 # el menu seguira apareciendo# 
     while opcion != 6:
 
-        print("\n====================================")
+        print("====================================")
         print("         MENÚ PRINCIPAL")
         print("====================================")
 
 #Se usa para mostrar una a una todas las opciones almacenadas en la tupla#
         for i in range(len(menu)):
-            print(f"{i + 1}. {menu[i]}")
+            print(i + 1, ".", menu[i])
 
-        opcion = int(input("\nSeleccione una opción: "))
+        opcion = int(input("Seleccione una opción: "))
 
 #Compara la opcion elegida por el usuario, al escribir "1" entrara#
 #al bloque de consultar saldo#
@@ -118,8 +118,7 @@ def mostrar_menu():
             ver_historial()
 
         elif opcion == 6:
-            print(f"\nHasta luego {cuentas[usuario_actual]['nombre']}")
-
+           print("Hasta luego", cuentas[usuario_actual]["nombre"])
 #Se aplica cuando el usuario escribe una opcion que no existe#
         else:
             print("Opción no válida.")
@@ -130,8 +129,33 @@ def consultar_saldo():
 #Accede al saldo del usuario actual utilizando el diccionario#
     saldo = cuentas[usuario_actual]["saldo"]
 
-    print("\n====================================")
+    print("====================================")
     print("        CONSULTA DE SALDO")
     print("====================================")
     print("Titular:", cuentas[usuario_actual]["nombre"])
     print("Saldo disponible: $", saldo)
+
+    #Depositar dinero#
+    #Esta función permite al usuario depositar dinero en su cuenta.
+def depositar_dinero():
+
+    #Solicita el monto que desea depositar.
+    monto = int(input("Ingrese el monto a depositar: "))
+
+    #Verifica que el monto sea mayor que cero.
+    if monto > 0:
+
+        #Actualiza el saldo del usuario.
+        cuentas[usuario_actual]["saldo"] = cuentas[usuario_actual]["saldo"] + monto
+
+        #Guarda el movimiento en el historial.
+        cuentas[usuario_actual]["historial"].append("Depósito: $" + str(monto))
+
+        #Muesta al usuario la informacion realizada y actualizada#
+        print("Depósito realizado con éxito.")
+        print("Nuevo saldo:", cuentas[usuario_actual]["saldo"])
+
+      #Al no cumplir con el primer condicional no puede ingresar para relizar movimientos#  
+    else:
+        print("El monto debe ser mayor que cero.")
+        
