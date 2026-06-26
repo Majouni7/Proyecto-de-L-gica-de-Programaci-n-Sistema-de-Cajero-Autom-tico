@@ -8,8 +8,8 @@
 
 cuentas = {
     134340: {
-        "pin": 4991,
-        "nombre": "Agust",
+        "pin": 3991,
+        "nombre": "Agust D",
         "saldo": 1000,
         "historial": []
     },
@@ -39,8 +39,9 @@ usuario_actual = None
 #La sigueinte funcion permite al usuario iniciar sesion#
 def iniciar_sesion():
  
-#Indicamos que utilizar una variable global que#
-#se puede utilizar en cualquier parte del programa#
+#Indicamos que vamos a utilizar la variable#
+#que creamos al inicio del programa, asi poder#
+#guardar el numero de cuenta#
  global usuario_actual
 
  #Solicitamos en numero de cuenta del usuario#
@@ -49,25 +50,35 @@ def iniciar_sesion():
 #Solicitamos el PIN#
  pin = int(input("Ingrese su PIN: "))
 
-#Verificamos si la cuenta existe#
+#Verificamos si la cuenta existe dentro del diccionario#
  if cuenta in cuentas:
 
-        # Verifica si el PIN es correcto
+        # Verifica si el PIN es correcto para la cuenta ingresada#
         if cuentas[cuenta]["pin"] == pin:
 
+            #Guarda cual usuario inicio sesion#
             usuario_actual = cuenta
 
             print("\n====================================")
             print(f"Bienvenido(a) {cuentas[cuenta]['nombre']}")
             print("Inicio de sesión exitoso.")
             print("====================================")
+        
 
+        #Indica que la sesion termino con exito#
             return True
 
+        #La siguiente condicion indica que termino con error#
         else:
             print("\nPIN incorrecto.")
             return False
-
+ else:
+        print("\nLa cuenta no existe.")
+        return False
+ 
+ #Programa Principal#
+ # Definimos a la función para iniciar el programa
+iniciar_sesion()
     
-
+#
 
