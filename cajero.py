@@ -80,5 +80,49 @@ def iniciar_sesion():
  # Definimos a la función para iniciar el programa
 iniciar_sesion()
     
-#
+#Menu Principal#
 
+#Esta funcion se encarga unicamente del menu principal#
+def mostrar_menu():
+
+#Guarda la opcion que selecciona el usuario#
+    opcion = 0
+
+#El bucle indica que mientras la opcion sea diferente de(!) 6,#
+# el menu seguira apareciendo# 
+    while opcion != 6:
+
+        print("\n====================================")
+        print("         MENÚ PRINCIPAL")
+        print("====================================")
+
+#Se usa para mostrar una a una todas las opciones almacenadas en la tupla#
+        for i in range(len(menu)):
+            print(f"{i + 1}. {menu[i]}")
+
+        opcion = int(input("\nSeleccione una opción: "))
+
+#Compara la opcion elegida por el usuario, al escribir "1" entrara#
+#al bloque de consultar saldo#
+        if opcion == 1:
+            print("Consultar saldo")
+
+#Al no cumplirse con la opcion anterior, revisa otra#
+        elif opcion == 2:
+            print("Depositar dinero")
+
+        elif opcion == 3:
+            print("Retirar dinero")
+
+        elif opcion == 4:
+            print("Transferir dinero")
+
+        elif opcion == 5:
+            print("Ver historial")
+
+        elif opcion == 6:
+            print(f"\nHasta luego {cuentas[usuario_actual]['nombre']}")
+
+#Se aplica cuando el usuario escribe una ipcion que no existe#
+        else:
+            print("Opción no válida.")
