@@ -22,6 +22,7 @@ cuentas = {
     }
 }
 #Menu principal#
+
 #En las opciones del menu se utiliza la tupla#
 #porque los datos son estaticos#
 
@@ -78,7 +79,8 @@ def iniciar_sesion():
         return False
  
 
-#Menu Principal#
+#####Menu Principal#####
+
 
 #Esta funcion se encarga unicamente del menu principal#
 def mostrar_menu():
@@ -94,7 +96,7 @@ def mostrar_menu():
         print("         MENÚ PRINCIPAL")
         print("====================================")
 
-#Se usa para mostrar una a una todas las opciones almacenadas en la tupla#
+        #Se usa para mostrar una a una todas las opciones almacenadas en la tupla#
         for i in range(len(menu)):
             print(i + 1, ".", menu[i])
 
@@ -105,7 +107,7 @@ def mostrar_menu():
         if opcion == 1:
             consultar_saldo()
 
-#Al no cumplirse con la opcion anterior, revisa otra#
+       #Al no cumplirse con la opcion anterior, revisa otra#
         elif opcion == 2:
             depositar_dinero()
 
@@ -119,25 +121,36 @@ def mostrar_menu():
 
         elif opcion == 6:
            print("Hasta luego", cuentas[usuario_actual]["nombre"])
-#Se aplica cuando el usuario escribe una opcion que no existe#
+       #Se aplica cuando el usuario escribe una opcion que no existe#
         else:
             print("Opción no válida.")
 
 #El objetivo de esta funcion es mostrar el saldo#
 def consultar_saldo():
 
-#Accede al saldo del usuario actual utilizando el diccionario#
+    print("====================================")
+    print("      CONSULTA DE SALDO")
+    print("====================================")
+
+
+
+    #Accede al saldo del usuario actual utilizando el diccionario#
     saldo = cuentas[usuario_actual]["saldo"]
 
-    print("====================================")
-    print("        CONSULTA DE SALDO")
-    print("====================================")
     print("Titular:", cuentas[usuario_actual]["nombre"])
     print("Saldo disponible: $", saldo)
 
-    #Depositar dinero#
-    #Esta función permite al usuario depositar dinero en su cuenta.
+
+######Depositar dinero#######
+
+
+#Esta función permite al usuario depositar dinero en su cuenta.
 def depositar_dinero():
+
+    print("====================================")
+    print("      DEPÓSITO DE DINERO")
+    print("====================================")
+
 
     #Solicita el monto que desea depositar.
     monto = int(input("Ingrese el monto a depositar: "))
@@ -155,7 +168,91 @@ def depositar_dinero():
         print("Depósito realizado con éxito.")
         print("Nuevo saldo:", cuentas[usuario_actual]["saldo"])
 
-      #Al no cumplir con el primer condicional no puede ingresar para relizar movimientos#  
+    #Al no cumplir con el primer condicional no puede ingresar para relizar movimientos#  
     else:
         print("El monto debe ser mayor que cero.")
-        
+
+
+###### Retirar dinero####
+
+
+#Esta función permite retirar dinero de la cuenta.
+def retirar_dinero():
+
+    print("====================================")
+    print("       RETIRO DE DINERO")
+    print("====================================")
+
+
+    #Solicita el monto que desea retirar.
+    monto = int(input("Ingrese el monto a retirar: "))
+
+    #Verifica que el monto sea mayor que cero #
+    # y el usuario no retire más dinero del que tiene#
+    if monto > 0:
+
+        #Comprueba que exista saldo suficiente.
+        if monto <= cuentas[usuario_actual]["saldo"]:
+
+            #Actualiza el saldo y utilizamos la resta (-) para descontar el dinero del saldo##
+            cuentas[usuario_actual]["saldo"] = cuentas[usuario_actual]["saldo"] - monto
+
+            #Guarda el movimiento en el historial.
+            cuentas[usuario_actual]["historial"].append("Retiro: $" + str(monto))
+
+            print("Retiro realizado con éxito.")
+            print("Nuevo saldo:", cuentas[usuario_actual]["saldo"])
+
+        #Al no cumplir con el primer condicional no podra realizar movimientos#
+        else:
+            print("Saldo insuficiente.")
+
+
+
+
+        #### Transferir dinero###
+
+
+        #Esta función permite transferir dinero a otra cuenta.
+def transferir_dinero():
+
+
+    print("====================================")
+    print("       TRANSFERENCIA")
+    print("====================================")
+
+    #Solicita el número de la cuenta destino.
+    cuenta_destino = int(input("Ingrese la cuenta destino: "))
+
+    #Solicita el monto a transferir.
+    monto = int(input("Ingrese el monto a transferir: "))
+
+    #Verifica que la cuenta exista.
+    if cuenta_destino in cuentas:
+
+        #Verifica que el monto sea mayor que cero.
+        if monto > 0:
+
+            #Comprueba que exista saldo suficiente.
+            if monto <= cuentas[usuario_actual]["saldo"]:
+
+                #Resta el dinero de la cuenta actual.
+                cuentas[usuario_actual]["saldo"] = cuentas[usuario_actual]["saldo"] - monto
+
+                #Suma el dinero a la cuenta destino.
+                cuentas[cuenta_destino]["saldo"] = cuentas[cuenta_destino]["saldo"] + monto
+
+                #Guarda el movimiento en el historial.
+                cuentas[usuario_actual]["historial"].append("Transferencia: $" + str(monto))
+
+                print("Transferencia realizada con éxito.")
+
+### Al no cumplir con alguna de las dos condicionales contamos con tres aaciones por defecto##
+            else:
+                print("Saldo insuficiente.")
+
+        else:
+            print("El monto debe ser mayor que cero.")
+
+    else:
+        print("La cuenta no existe.")
