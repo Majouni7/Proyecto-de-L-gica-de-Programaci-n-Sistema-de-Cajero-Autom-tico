@@ -33,3 +33,41 @@ menu = (
     "Ver historial",
     "Cerrar sesión"
 )
+#Se guarda en nuemero de cuenta del ussuario que inicie sesion#
+usuario_actual = None
+
+#La sigueinte funcion permite al usuario iniciar sesion#
+def iniciar_sesion():
+ 
+#Indicamos que utilizar una variable global que#
+#se puede utilizar en cualquier parte del programa#
+ global usuario_actual
+
+ #Solicitamos en numero de cuenta del usuario#
+ cuenta = int(input("Ingrese su número de cuenta: "))
+
+#Solicitamos el PIN#
+ pin = int(input("Ingrese su PIN: "))
+
+#Verificamos si la cuenta existe#
+ if cuenta in cuentas:
+
+        # Verifica si el PIN es correcto
+        if cuentas[cuenta]["pin"] == pin:
+
+            usuario_actual = cuenta
+
+            print("\n====================================")
+            print(f"Bienvenido(a) {cuentas[cuenta]['nombre']}")
+            print("Inicio de sesión exitoso.")
+            print("====================================")
+
+            return True
+
+        else:
+            print("\nPIN incorrecto.")
+            return False
+
+    
+
+
