@@ -64,7 +64,8 @@ def iniciar_sesion():
             print("Inicio de sesión exitoso.")
             print("====================================")
         
-
+        #Muestra al menu pricipal#
+            mostrar_menu() 
         #Indica que la sesion termino con exito#
             return True
 
@@ -76,10 +77,7 @@ def iniciar_sesion():
         print("\nLa cuenta no existe.")
         return False
  
- #Programa Principal#
- # Definimos a la función para iniciar el programa
-iniciar_sesion()
-    
+
 #Menu Principal#
 
 #Esta funcion se encarga unicamente del menu principal#
@@ -105,24 +103,35 @@ def mostrar_menu():
 #Compara la opcion elegida por el usuario, al escribir "1" entrara#
 #al bloque de consultar saldo#
         if opcion == 1:
-            print("Consultar saldo")
+            consultar_saldo()
 
 #Al no cumplirse con la opcion anterior, revisa otra#
         elif opcion == 2:
-            print("Depositar dinero")
+            depositar_dinero()
 
         elif opcion == 3:
-            print("Retirar dinero")
+            retirar_dinero()
 
         elif opcion == 4:
-            print("Transferir dinero")
-
+            transferir_dinero()
         elif opcion == 5:
-            print("Ver historial")
+            ver_historial()
 
         elif opcion == 6:
             print(f"\nHasta luego {cuentas[usuario_actual]['nombre']}")
 
-#Se aplica cuando el usuario escribe una ipcion que no existe#
+#Se aplica cuando el usuario escribe una opcion que no existe#
         else:
             print("Opción no válida.")
+
+#El objetivo de esta funcion es mostrar el saldo#
+def consultar_saldo():
+
+#Accede al saldo del usuario actual utilizando el diccionario#
+    saldo = cuentas[usuario_actual]["saldo"]
+
+    print("\n====================================")
+    print("        CONSULTA DE SALDO")
+    print("====================================")
+    print("Titular:", cuentas[usuario_actual]["nombre"])
+    print("Saldo disponible: $", saldo)
