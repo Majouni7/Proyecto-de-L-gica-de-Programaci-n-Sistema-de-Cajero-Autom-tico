@@ -3,8 +3,7 @@
 #Estudiante: María José Yanchatipán Almache#
 # Asignatura: Lógica de Programación#
 
-#Los datos de cada cuenta están siendo# 
-# guardados en un diccionario#
+#Los datos de cada cuenta están siendo guardados en un diccionario#
 
 cuentas = {
     134340: {
@@ -20,11 +19,13 @@ cuentas = {
         "saldo": 500,
         "historial": []
     }
+    
 }
 #Menu principal#
 
-#En las opciones del menu se utiliza la tupla#
-#porque los datos son estaticos#
+
+
+#En las opciones del menu se utiliza la tupla porque los datos son estaticos#
 
 menu = (
     "Consultar saldo",
