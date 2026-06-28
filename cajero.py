@@ -19,7 +19,7 @@ cuentas = {
         "saldo": 500,
         "historial": []
     }
-    
+
 }
 #Menu principal#
 
@@ -37,15 +37,15 @@ menu = (
 )
 
 
-#Se guarda en nuemero de cuenta del ussuario que inicie sesion#
+#Se guarda en nuemero de cuenta del usuario que inicie sesion#
 usuario_actual = None
 
-#La sigueinte funcion permite al usuario iniciar sesion#
+#La siguinte funcion permite al usuario iniciar sesion#
 def iniciar_sesion():
  
-#Indicamos que vamos a utilizar la variable#
-#que creamos al inicio del programa, asi poder#
+#Indicamos que vamos a utilizar la variable que creamos al inicio del programa, asi poder#
 #guardar el numero de cuenta#
+
  global usuario_actual
 
  #Solicitamos en numero de cuenta del usuario#
@@ -70,7 +70,7 @@ def iniciar_sesion():
         
         #Muestra al menu pricipal#
             mostrar_menu() 
-        #Indica que la sesion termino con exito#
+        #Return True devuelve el valor True para indicar que la sesion fue exitosa#
             return True
 
         #La siguiente condicion indica que termino con error#
@@ -103,6 +103,8 @@ def mostrar_menu():
         for i in range(len(menu)):
             print(i + 1, ".", menu[i])
 
+
+#En esta línea de código se solicita al usuario que seleccione una opción del menú#
         opcion = int(input("Seleccione una opción: "))
 
 #Compara la opcion elegida por el usuario, al escribir "1" entrara#
@@ -119,11 +121,14 @@ def mostrar_menu():
 
         elif opcion == 4:
             transferir_dinero()
+
         elif opcion == 5:
             ver_historial()
 
         elif opcion == 6:
            print("Hasta luego", cuentas[usuario_actual]["nombre"])
+
+
        #Se aplica cuando el usuario escribe una opcion que no existe#
         else:
             print("Opción no válida.")
@@ -212,6 +217,7 @@ def retirar_dinero():
         #Al no cumplir con el primer condicional no podra realizar movimientos#
         else:
             print("Saldo insuficiente.")
+
     else:
         print("El monto debe ser mayor que cero.")
 
@@ -221,10 +227,10 @@ def retirar_dinero():
         #### Transferir dinero###
 
 
-        #Esta función permite transferir dinero a otra cuenta.
+#Esta función permite transferir dinero a otra cuenta.
 def transferir_dinero():
 
-
+#Realizamos una presentacion para la opcion de transferencia#
     print("====================================")
     print("       TRANSFERENCIA")
     print("====================================")
@@ -238,10 +244,10 @@ def transferir_dinero():
     #Verifica que la cuenta exista.
     if cuenta_destino in cuentas:
 
-        #Verifica que el monto sea mayor que cero.
+        #Verifica que el monto sea mayor que cero#
         if monto > 0:
 
-            #Comprueba que exista saldo suficiente.
+            #Comprueba que exista saldo suficiente, el monto debe ser menor o igual al saldo disponible#
             if monto <= cuentas[usuario_actual]["saldo"]:
 
                 #Resta el dinero de la cuenta actual.
@@ -271,13 +277,19 @@ def transferir_dinero():
 #Esta función muestra todos los movimientos realizados.
 def ver_historial():
 
+
+    #Realizamos una presentacion para la opcion del hidtorial#
+
     print("====================================")
     print("         HISTORIAL")
     print("====================================")
 
-    ## De ser el caso de no tener movimientos simplemente aparecerá el título y no mostrará movimientos# 
+    ## De ser el caso de no tener movimientos, simplemente aparecerá el título y no mostrará movimientos# 
     for movimiento in cuentas[usuario_actual]["historial"]:
         print(movimiento)
+
+#"Esta parte está al final porque primero es necesario definir todas las funciones del programa. Una vez que ya están creadas, se llama a iniciar_sesion(), 
+# que es la función que inicia la ejecución del sistema#
 
 #==========================================================
 # Programa principal
