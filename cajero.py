@@ -25,7 +25,8 @@ cuentas = {
 
 
 
-#En las opciones del menu se utiliza la tupla porque los datos son estaticos#
+#En las opciones del menú se utiliza la tupla porque 
+# los datos son estaticos#
 
 menu = (
     "Consultar saldo",
@@ -37,18 +38,19 @@ menu = (
 )
 
 
-#Se guarda en nuemero de cuenta del usuario que inicie sesion#
+#Se guarda en número de cuenta del usuario que inicie sesión#
 usuario_actual = None
 
-#La siguinte funcion permite al usuario iniciar sesion#
+#La siguinte funcion permite al usuario iniciar sesión#
 def iniciar_sesion():
  
-#Indicamos que vamos a utilizar la variable que creamos al inicio del programa, asi poder#
-#guardar el numero de cuenta#
+#Indicamos que vamos a utilizar la variable que creamos al inicio
+#  del programa y asi poder#
+#guardar el número de cuenta#
 
  global usuario_actual
 
- #Solicitamos en numero de cuenta del usuario#
+ #Solicitamos en número de cuenta del usuario#
  cuenta = int(input("Ingrese su número de cuenta: "))
 
 #Solicitamos el PIN#
@@ -68,12 +70,13 @@ def iniciar_sesion():
             print("Inicio de sesión exitoso.")
             print("====================================")
         
-        #Muestra al menu pricipal#
+        #Muestra al menú pricipal#
             mostrar_menu() 
-        #Return True devuelve el valor True para indicar que la sesion fue exitosa#
+        #Return True devuelve el valor True para indicar 
+        # que la sesión fue exitosa#
             return True
 
-        #La siguiente condicion indica que termino con error#
+        #La siguiente condición indica que terminó con error#
         else:
             print("PIN incorrecto.")
             return False
@@ -85,13 +88,13 @@ def iniciar_sesion():
 #####Menu Principal#####
 
 
-#Esta funcion se encarga unicamente del menu principal#
+#Esta función se encarga únicamente del menú principal#
 def mostrar_menu():
 
-#Guarda la opcion que selecciona el usuario#
+#Guarda la opción que selecciona el usuario#
     opcion = 0
 
-#El bucle indica que mientras la opcion sea diferente de(!) 6,#
+#El bucle indica que mientras la opción sea diferente de(!) 6,#
 # el menu seguira apareciendo# 
     while opcion != 6:
 
@@ -99,44 +102,46 @@ def mostrar_menu():
         print("         MENÚ PRINCIPAL")
         print("====================================")
 
-        #Se usa para mostrar una a una todas las opciones almacenadas en la tupla#
+        #Se usa para mostrar una a una todas las 
+        # opciones almacenadas en la tupla#
         for i in range(len(menu)):
             print(i + 1, ".", menu[i])
 
 
-#En esta línea de código se solicita al usuario que seleccione una opción del menú#
-        opcion = int(input("Seleccione una opción: "))
+#En esta línea de código se solicita al usuario 
+# que seleccione una opción del menú#
+        opción = int(input("Seleccione una opción: "))
 
-#Compara la opcion elegida por el usuario, al escribir "1" entrara#
+#Compara la opción elegida por el usuario, al escribir "1" entrara#
 #al bloque de consultar saldo#
-        if opcion == 1:
+        if opción == 1:
             consultar_saldo()
 
-       #Al no cumplirse con la opcion anterior, revisa otra#
-        elif opcion == 2:
+       #Al no cumplirse con la opción anterior, revisa otra#
+        elif opción == 2:
             depositar_dinero()
 
-        elif opcion == 3:
+        elif opción == 3:
             retirar_dinero()
 
-        elif opcion == 4:
+        elif opción == 4:
             transferir_dinero()
 
-        elif opcion == 5:
+        elif opción == 5:
             ver_historial()
 
-        elif opcion == 6:
+        elif opción == 6:
            print("Hasta luego", cuentas[usuario_actual]["nombre"])
 
 
-       #Se aplica cuando el usuario escribe una opcion que no existe#
+       #Se aplica cuando el usuario escribe una opción que no existe#
         else:
             print("Opción no válida.")
 
 
 
 
-#El objetivo de esta funcion es mostrar el saldo#
+#El objetivo de esta función es mostrar el saldo#
 def consultar_saldo():
 
     print("====================================")
@@ -202,7 +207,8 @@ def retirar_dinero():
     # y el usuario no retire más dinero del que tiene#
     if monto > 0:
 
-        #Comprueba que exista saldo suficiente.
+        #Comprueba que exista saldo suficiente, menor
+        #o igual en saldo base#
         if monto <= cuentas[usuario_actual]["saldo"]:
 
             #Actualiza el saldo y utilizamos la resta (-) para descontar el dinero del saldo##
@@ -247,7 +253,8 @@ def transferir_dinero():
         #Verifica que el monto sea mayor que cero#
         if monto > 0:
 
-            #Comprueba que exista saldo suficiente, el monto debe ser menor o igual al saldo disponible#
+            #Comprueba que exista saldo suficiente,
+            #  el monto debe ser menor o igual al saldo disponible#
             if monto <= cuentas[usuario_actual]["saldo"]:
 
                 #Resta el dinero de la cuenta actual.
@@ -261,7 +268,8 @@ def transferir_dinero():
 
                 print("Transferencia realizada con éxito.")
 
-### Al no cumplir con alguna de las dos condicionales contamos con tres aaciones por defecto##
+        ###Al no cumplir con alguna de las dos condicionales 
+        #contamos con tres acciones por defecto##
             else:
                 print("Saldo insuficiente.")
 
@@ -278,17 +286,19 @@ def transferir_dinero():
 def ver_historial():
 
 
-    #Realizamos una presentacion para la opcion del hidtorial#
+    #Realizamos una presentación para la opción del historial#
 
     print("====================================")
     print("         HISTORIAL")
     print("====================================")
 
-    ## De ser el caso de no tener movimientos, simplemente aparecerá el título y no mostrará movimientos# 
+    ## De ser el caso de no tener movimientos, 
+    # simplemente aparecerá el título y no mostrará movimientos# 
     for movimiento in cuentas[usuario_actual]["historial"]:
         print(movimiento)
 
-#"Esta parte está al final porque primero es necesario definir todas las funciones del programa. Una vez que ya están creadas, se llama a iniciar_sesion(), 
+#"Esta parte está al final porque primero es necesario definir todas 
+# las funciones del programa. Una vez que ya están creadas, se llama a iniciar_sesion(), 
 # que es la función que inicia la ejecución del sistema#
 
 #==========================================================
